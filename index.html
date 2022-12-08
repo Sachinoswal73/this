@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <title>'this' Keyword</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <script src="js/app.js"></script>
+    <div class="container">
+        <h1 class="alert alert-info m-4">this</h1>
+        <hr>
+        <h3 class="alert alert-warning">1. </h3>
+        <p>
+            - 'this' keyword represents the closest parent object of the method. It saves time & length of code.
+            <br>
+            <br>
+            - 
+            <b>Examples -</b>
+            <br>
+            <br>
+
+            <b>*</b> use of keyword 'this' in an object which include child & grandChild object
+            <br>
+            --- Output -->
+                <script>  
+                    person = {
+                        firstName : 'Balasaheb',
+                        lastName : 'Thackeray',
+                        fullName : function () { 
+                            // return person.firstName + ' ' + person.lastName;
+                            return this.firstName + ' ' + this.lastName; // use of 'this' instead of person.
+                        },
+                        child : {
+                            firstName : 'Uddhav',
+                            lastName : 'Thackeray',
+                            fullName : function() {
+                                // return person.child.firstName + ' ' + person.child.lastName;
+                                return this.firstName + ' ' + this.lastName; // use of 'this' instead person.child.
+                            },
+                            grandChild : {
+                                firstName : 'Aditya',
+                                lastName : 'Thackeray',
+                                fullName : function () {
+                                    // return person.child.grandChild.firstName + " " + person.child.grandChild.lastName;
+                                    return this.firstName + this.lastName; // use of 'this' instead of person.child.granChild
+
+                                }
+                            }
+                        }
+                    }
+                    document.write(person.fullName() + " - " + person.child.fullName() + " - " + person.child.grandChild.fullName());
+                </script>
+            <br>
+            // The value of the key fullName is a function(). Infact, fullName is a function itself, which is compliled here like fullName() {} in above example & that's why we are calling it whenever we need the value of this key. ex. person.fullName();
+            <br>
+            // 'this' keyword takes the declaration of the closest parent object & that's why in above example it saved a lot of time & code in writing all the hierarchy everywhere, we instead used just 'this'.
+            <br>
+            // firstName & lastName are the keys which is called as 'Property', but fullName is the key which is called as 'Method' because it's including an anonymous function
+            <br>
+            <br>
+           
+                
+           <br>
+        </p>
+        <br>
+        <h3 class="alert alert-warning">Assignment</h3>
+        <p>
+           --
+            <br>
+            <b>Ex.1 - </b> 
+            <br>
+            Output - --> 
+            <script>
+                var developers = {
+                    fName : 'Sachin',
+                    lName : 'Oswal',
+                    fullName : function () {
+                        return this.fName + ' ' + this.lName;
+                    },
+                    skills : ['HTML','CSS','JS'],
+                    score : 73
+                }
+                document.write("I'm " + developers.fullName() + ". I'm a developer & obtain skills like " + developers.skills[0] + " & my score in the exam is " + developers.score );
+            </script>
+            <br>
+            <br>
+            <b>Ex.2 - </b> 
+            <br>
+            Output - --> 
+            <script>
+               var cars = {
+                    brand1 : {
+                        model1 : {
+                            modelName : 'Swift',
+                            price : 700000,
+                            mileage : 20.5,
+                            rating : function () {
+                                if ( this.price < 800000 && this.mileage > 16 ) {
+                                    return this.modelName + ' is Great.';
+                                }
+                                else if ( this.price < 1000000 && this.mileage > 18 ) {
+                                    return this.modelName + ' is Nice';
+                                }
+                                else {
+                                    return this.modelName + ' is Average';
+                                }
+                            }
+                        },
+                        model2 : {
+                            modelName : 'DZire',
+                            price : 900000,
+                            mileage : 18.5,
+                            rating : function () {
+                                if (this.price < 800000 && this.mileage > 18) {
+                                    return this.modelName + 'is Great';
+                                }
+                                else if (this.price < 1000000 && this.mileage > 18){
+                                    return this.modelName + ' is Nice';
+                                }
+                                else {
+                                    return this.modelName + ' is Average';
+                                }
+                            }
+                        },
+                        model3 : {
+                            modelName : 'Brezza',
+                            price : 1200000,
+                            mileage : 16.5,
+                            rating : function() {
+                                if ( this.price < 800000 && this.mileage > 18){
+                                    return this.modelName + ' is Great';
+                                }
+                                else if ( this.price < 1000000 && this.mileage > 16 ){
+                                    return this.modelName + ' is Nice';
+                                }
+                                else {
+                                    return this.modelName + ' is Average';
+                                }
+                            }
+                        }
+                    }
+               }
+
+               document.write(cars.brand1.model1.rating() + ' | ' + cars.brand1.model2.rating() + " | " + cars.brand1.model3.rating());
+            </script>
+            <br>
+            <br>
+
+            <b>Ex.3 - </b> 
+            <br>
+            Output - --> 
+            <script>
+              var laptops = {
+                    brand1 : {
+                        brandName : 'DELL',
+                        model1 : {
+                            modelName : 'Inspiron 3305',
+                            ram : 12,
+                            hdd : 256,
+                            stars : function() {
+                                    if (this.ram >=12 && this.hdd >=512 ){
+                                        return this.modelName + ' - Config is Awesome.';
+                                    }
+                                    if (this.ram >=12 || this.hdd >=512 ){
+                                        return this.modelName + ' - Config is Great.';
+                                    }
+                                    else if (this.ram >=8 || this.hdd >= 256) {
+                                        return this.modelName + '- Config is Good.';
+                                    }
+                                    else {
+                                        return this.modelName + '- Config is Ok';
+                                    }
+                            }
+                        },
+                        model2 : {
+                            modelName : 'Vostro 2050',
+                            ram : 12,
+                            hdd : 512,
+                            stars : function() {
+                                    if (this.ram >=12 && this.hdd >=512 ){
+                                        return this.modelName + ' - Config is Awesome.';
+                                    }
+                                    if (this.ram >=12 || this.hdd >=512 ){
+                                        return this.modelName + ' - Config is Great.';
+                                    }
+                                    else if (this.ram >=8 || this.hdd >= 256) {
+                                        return this.modelName + '- Config is Good.';
+                                    }
+                                    else {
+                                        return this.modelName + '- Config is Ok';
+                                    }
+                            }
+                        }
+                    },
+                    brand2 : {
+                        brandName : 'LENOVO',
+                        model1 : {
+                            modelName : 'Ideapad Slim 3',
+                            ram : 8,
+                            hdd : 256,
+                            stars : function() {
+                                    if (this.ram >=12 && this.hdd >=512 ){
+                                        return this.modelName + ' - Config is Awesome.';
+                                    }
+                                    else if (this.ram >=12 || this.hdd >=512 ){
+                                        return this.modelName + ' - Config is Great.';
+                                    }
+                                    else if (this.ram >=8 && this.hdd >= 256) {
+                                        return this.modelName + '- Config is Good.';
+                                    }
+                                    else {
+                                        return this.modelName + '- Config is Ok';
+                                    }
+                            }
+                        },
+                        model2 : {
+                            modelName : 'Ideapad Slim 8',
+                            ram : 8,
+                            hdd : 128,
+                            stars : function() {
+                                    if (this.ram >=12 && this.hdd >=512 ){
+                                        return this.modelName + ' - Config is Awesome.';
+                                    }
+                                    else if (this.ram >=12 || this.hdd >=512 ){
+                                        return this.modelName + ' - Config is Great.';
+                                    }
+                                    else if (this.ram >=8 && this.hdd >= 256) {
+                                        return this.modelName + '- Config is Good.';
+                                    }
+                                    else {
+                                        return this.modelName + '- Config is Ok';
+                                    }
+                            }
+                        }
+                    }
+              }
+
+              document.write(laptops.brand1.model1.stars() + " | " + laptops.brand1.model2.stars() + " | " + laptops.brand2.model1.stars() + ' | ' + laptops.brand2.model2.stars());
+            </script>
+            <br>
+            <br>
+
+            <b>Ex.4 - </b> 
+            <br>
+            Output - --> 
+            <script>
+              var India = {
+                state1 : {
+                    stateName : 'Maharashtra',
+                    population : 80000000,
+                    area : 1000000,
+                    app : function () {
+                        return this.area / this.population;
+                    }  
+                },
+                state2 : {
+                    stateName : 'Karnataka',
+                    population : 30000000,
+                    area : 750000,
+                    app : function () {
+                        return this.area / this.population;
+                    }
+                },
+                state3 : {
+                    stateName : 'Gujrat',
+                    population : 50000000,
+                    area : 900000,
+                    app : function () {
+                        return this.area / this.population;
+                    }
+                }
+              }
+
+              document.write('Area / Person - Maharashtra - ' + India.state1.app() + ' | Karnataka - ' + India.state2.app() + ' | Gujrat -' + India.state3.app());
+            
+            </script>
+       <br>
+       <br>
+       <b>Ex.5 - </b> 
+       <br>
+       Output - --> 
+       <p id="studentsResult"></p>
+       <script>
+
+            var studentsExam = [
+                {
+                    sName : 'Kushal',
+                    sub1 : 40,
+                    sub2 : 74,
+                    sub3 : 38,
+                    result : function () {
+                        return ( this.sub1 + this.sub2 + this.sub3 ) / 3;
+                        // var perc = ( this.sub1 + this.sub2 + this.sub3 ) / 3;
+                    },
+                    grade : function () {
+                        if ( this.result() > 35 && this.result() > 55 && this.result() > 75 ) {
+                            return 'A';
+                        }
+                        else if ( this.result() > 35 && this.result() > 55 ) {
+                            return 'B';
+                        }
+                        else if ( this.result() > 35 ) {
+                            return 'C';
+                        }
+                        else {
+                            return 'Fail';
+                        }
+                    }
+                },
+                {
+                    sName : 'Lokesh',
+                    sub1 : 91,
+                    sub2 : 59,
+                    sub3 : 79,
+                    result : function () {
+                        return ( this.sub1 + this.sub2 + this.sub3 ) / 3;
+                        // var perc = ( this.sub1 + this.sub2 + this.sub3 ) / 3;
+                    },
+                    grade : function () {
+                        if ( this.result() > 35 && this.result() > 55 && this.result() > 75 ) {
+                            return 'A';
+                        }
+                        else if ( this.result() > 35 && this.result() > 55 ) {
+                            return 'B';
+                        }
+                        else if ( this.result() > 35 ) {
+                            return 'C';
+                        }
+                        else {
+                            return 'Fail';
+                        }
+                    }
+                },
+                {
+                    sName : 'Karan',
+                    sub1 : 64,
+                    sub2 : 62,
+                    sub3 : 68,
+                    result : function () {
+                        return ( this.sub1 + this.sub2 + this.sub3 ) / 3;
+                        // var perc = ( this.sub1 + this.sub2 + this.sub3 ) / 3; // it doesn't work, need to check
+                    },
+                    grade : function () {
+                        if ( this.result() > 35 && this.result() > 55 && this.result() > 75 ) {
+                            return 'A';
+                        }
+                        else if ( this.result() > 35 && this.result() > 55 ) {
+                            return 'B';
+                        }
+                        else if ( this.result() > 35 ) {
+                            return 'C';
+                        }
+                        else {
+                            return 'Fail';
+                        }
+                    }
+                }
+            ];
+
+            sresults = `Result of Students
+                        <table class='table table-bordered mt-2'>
+                        <thead><td>Name</td><td>Result</td><td>Grade</td></thead>
+                        <tbody>
+            `;
+
+            for ( var q=0; q < studentsExam.length; q++ ) {
+
+            sresults += ` 
+            <tr><td> ${ studentsExam[q].sName } </td> <td> ${ studentsExam[q].result() } </td> <td> ${ studentsExam[q].grade() } </td> </tr>
+            `;
+            }
+
+            sresults += `</tbody></table>`;
+
+            document.getElementById('studentsResult').innerHTML = sresults;
+
+       </script>
+            <br>
+            <br>
+
+        </p>
+
+      
+    </div>
+
+</body>
+
+</html>
